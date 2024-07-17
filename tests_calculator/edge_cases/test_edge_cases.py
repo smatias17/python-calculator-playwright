@@ -1,10 +1,8 @@
-import pytest
 from helpers.docker_sp.docker_helper import docker_list
 
 def test_should_validate_operation_position_v1():
     value_v1 = 'test'
     docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli {value_v1}'
-    print(docker_command)
     docker_output = docker_list(docker_command)
     actual_result = ' '.join(docker_output)
     if 'Error:' in docker_output:
@@ -20,7 +18,6 @@ def test_should_validate_operation_position_v1():
 def test_should_validate_operation_position_v2():
     value_v2 = '1'
     docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli {value_v2}'
-    print(docker_command)
     docker_output = docker_list(docker_command)
     actual_result = ' '.join(docker_output)
     if 'Error:' in docker_output:
@@ -36,7 +33,6 @@ def test_should_validate_operation_position_v2():
 def test_should_validate_special_symbols_v1():
     value_v1 = "\\"
     docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli add {value_v1}1 {value_v1}1'
-    print(docker_command)
     docker_output = docker_list(docker_command)
     actual_result = ' '.join(docker_output)
     if 'Invalid argument.' in docker_output:
@@ -52,7 +48,6 @@ def test_should_validate_special_symbols_v1():
 def test_should_validate_special_symbols_v2():
     value_v2 = '"'
     docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli subtract {value_v2}1 {value_v2}1'
-    print(docker_command)
     docker_output = docker_list(docker_command)
     actual_result = ' '.join(docker_output)
     if 'Invalid argument.' in docker_output:
@@ -68,7 +63,6 @@ def test_should_validate_special_symbols_v2():
 def test_should_validate_special_symbols_v3():
     value_v3 = '#'
     docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli multiply {value_v3}1 {value_v3}1'
-    print(docker_command)
     docker_output = docker_list(docker_command)
     actual_result = ' '.join(docker_output)
     if 'Invalid argument.' in docker_output:
@@ -83,7 +77,6 @@ def test_should_validate_special_symbols_v3():
 
 def test_should_validate_one_argument():
     docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli add 1'
-    print(docker_command)
     docker_output = docker_list(docker_command)
     actual_result = ' '.join(docker_output)
     if 'Error:' in docker_output:
@@ -98,7 +91,6 @@ def test_should_validate_one_argument():
                       
 def test_should_validate_three_argument():
     docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli add 1 1 1'
-    print(docker_command)
     docker_output = docker_list(docker_command)
     actual_result = ' '.join(docker_output)
     if 'Error:' in docker_output:
@@ -113,7 +105,6 @@ def test_should_validate_three_argument():
 
 def test_should_validate_four_argument():
     docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli add 1 1 1 1'
-    print(docker_command)
     docker_output = docker_list(docker_command)
     actual_result = ' '.join(docker_output)
     if 'Error:' in docker_output:
@@ -128,9 +119,7 @@ def test_should_validate_four_argument():
 
 def test_should_add_float_numbers_doc():
     docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli add 1.00000001 1.00000001'
-    print(docker_command)
     docker_output = docker_list(docker_command)
-    print(docker_output)
     if 'Result:' in docker_output:
         expected_result = 2.0
         assert expected_result==docker_output[1], f'Incorrect result for addition, ' \
