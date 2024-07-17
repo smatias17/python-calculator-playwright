@@ -6,7 +6,7 @@
     - add pythonpath 'export PYTHONPATH=.'
     - Execute: playwright install
 
-- Execute commands:
+- Test execution commands:
     - pytest -k 'name of the test' # the name of the test is a regex that will look for the exact name or a key word
     - Examples:
         - pytest -k test_should_add_basic
