@@ -89,22 +89,7 @@ def test_should_multiply_float_numbers():
             else:
                 assert False, f'Incorrect result: {docker_output}, '
                 
-def test_should_multiply_edge_case_bv1():
-    value_en = 1111111111111111
-    docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli multiply {value_en} 1'
-    print(docker_command)
-    docker_output = docker_list(docker_command)
-    print(docker_output)
-    if 'Result:' in docker_output:
-        expected_result = value_en * 1
-        assert expected_result==int(docker_output[1]), f'Incorrect result for multiplication, ' \
-                                                       f'Expected result: {expected_result} ' \
-                                                       f'Actual result: {docker_output[1]} ' \
-                                                       f'Executed command: {docker_command}'     
-    else:
-        assert False, f'Incorrect result: {docker_output}, '
-
-def test_should_multiply_edge_case_bv2():
+def test_should_multiply_edge_case_bv1_17_digits():
     value_en = 11111111111111111
     docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli multiply {value_en} 1'
     print(docker_command)
@@ -119,8 +104,23 @@ def test_should_multiply_edge_case_bv2():
     else:
         assert False, f'Incorrect result: {docker_output}, '
 
-def test_should_multiply_edge_case_bv3():
+def test_should_multiply_edge_case_bv2_18_digits():
     value_en = 111111111111111111
+    docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli multiply {value_en} 1'
+    print(docker_command)
+    docker_output = docker_list(docker_command)
+    print(docker_output)
+    if 'Result:' in docker_output:
+        expected_result = value_en * 1
+        assert expected_result==int(docker_output[1]), f'Incorrect result for multiplication, ' \
+                                                       f'Expected result: {expected_result} ' \
+                                                       f'Actual result: {docker_output[1]} ' \
+                                                       f'Executed command: {docker_command}'     
+    else:
+        assert False, f'Incorrect result: {docker_output}, '
+
+def test_should_multiply_edge_case_bv3_16_digits():
+    value_en = 1111111111111111
     docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli multiply {value_en} 1'
     print(docker_command)
     docker_output = docker_list(docker_command)

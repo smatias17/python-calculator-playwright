@@ -136,7 +136,7 @@ def test_should_divide_float_numbers():
             else:
                 assert False, f'Incorrect result: {docker_output}, '
                 
-def test_should_divide_edge_case_bv1():
+def test_should_divide_edge_case_bv1_17_digits():
     value_en = 11111111111111111
     docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli divide {value_en} 1'
     print(docker_command)
@@ -151,7 +151,7 @@ def test_should_divide_edge_case_bv1():
     else:
         assert False, f'Incorrect result: {docker_output}, '
 
-def test_should_divide_edge_case_bv2():
+def test_should_divide_edge_case_bv2_18_digits():
     value_en = 111111111111111111
     docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli divide {value_en} 1'
     print(docker_command)
@@ -166,8 +166,8 @@ def test_should_divide_edge_case_bv2():
     else:
         assert False, f'Incorrect result: {docker_output}, '
 
-def test_should_divide_edge_case_bv3():
-    value_en = 1111111111111111111
+def test_should_divide_edge_case_bv3_16_digits():
+    value_en = 1111111111111111
     docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli divide {value_en} 1'
     print(docker_command)
     docker_output = docker_list(docker_command)
