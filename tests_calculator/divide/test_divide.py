@@ -13,16 +13,21 @@ def test_should_divide_first_nine_natural_numbers_with_zero():
         for value_b in range(10):
             docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli divide {value_a} {value_b}'
             docker_output = docker_list(docker_command)
-            expected_result = value_a / value_b
-            if value_a % value_b == 0:
-                expected_result = int(expected_result)
-                docker_output[1] = int(docker_output[1])
+            expected_result = 0
+            expected_error = ''
+            actual_error = ''
+            if 'Result:' in docker_output:
+                expected_result = value_a / value_b
+                if value_a % value_b == 0:
+                    expected_result = int(expected_result)
+                    docker_output[1] = int(docker_output[1])
+                else:
+                    docker_output[1] = float(docker_output[1])
+                    if (len(str(expected_result))-2) > 7:
+                        expected_result = round(expected_result, 8)
             else:
-                docker_output[1] = float(docker_output[1])
-                if (len(str(expected_result))-2) > 7:
-                    expected_result = round(expected_result, 8)
-            expected_error = 'Error: Cannot divide by zero'
-            actual_error = ' '.join(docker_output).rstrip() 
+                expected_error = 'Error: Cannot divide by zero'
+                actual_error = ' '.join(docker_output).rstrip() 
             divide_specific_validate(docker_output, expected_result, expected_error, docker_output[1], actual_error, docker_command) 
 
 def test_should_divide_first_nine_negative_numbers_with_zero():
@@ -32,16 +37,21 @@ def test_should_divide_first_nine_negative_numbers_with_zero():
             value_b = value_b * (-1)
             docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli divide {value_a} {value_b}'
             docker_output = docker_list(docker_command)
-            expected_result = value_a / value_b
-            if value_a % value_b == 0:
-                expected_result = int(expected_result)
-                docker_output[1] = int(docker_output[1])
+            expected_result = 0
+            expected_error = ''
+            actual_error = ''
+            if 'Result:' in docker_output:
+                expected_result = value_a / value_b
+                if value_a % value_b == 0:
+                    expected_result = int(expected_result)
+                    docker_output[1] = int(docker_output[1])
+                else:
+                    docker_output[1] = float(docker_output[1])
+                    if (len(str(expected_result))-2) > 7:
+                        expected_result = round(expected_result, 8)
             else:
-                docker_output[1] = float(docker_output[1])
-                if (len(str(expected_result))-2) > 7:
-                    expected_result = round(expected_result, 8)
-            expected_error = 'Error: Cannot divide by zero'
-            actual_error = ' '.join(docker_output).rstrip() 
+                expected_error = 'Error: Cannot divide by zero'
+                actual_error = ' '.join(docker_output).rstrip() 
             divide_specific_validate(docker_output, expected_result, expected_error, docker_output[1], actual_error, docker_command)
 
 def test_should_divide_first_nine_negative_and_positive_numbers():
@@ -50,16 +60,21 @@ def test_should_divide_first_nine_negative_and_positive_numbers():
             value_a = value_a * (-1)
             docker_command = f'docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli divide {value_a} {value_b}'
             docker_output = docker_list(docker_command)
-            expected_result = value_a / value_b
-            if value_a % value_b == 0:
-                expected_result = int(expected_result)
-                docker_output[1] = int(docker_output[1])
+            expected_result = 0
+            expected_error = ''
+            actual_error = ''
+            if 'Result:' in docker_output:
+                expected_result = value_a / value_b
+                if value_a % value_b == 0:
+                    expected_result = int(expected_result)
+                    docker_output[1] = int(docker_output[1])
+                else:
+                    docker_output[1] = float(docker_output[1])
+                    if (len(str(expected_result))-2) > 7:
+                        expected_result = round(expected_result, 8)
             else:
-                docker_output[1] = float(docker_output[1])
-                if (len(str(expected_result))-2) > 7:
-                    expected_result = round(expected_result, 8)
-            expected_error = 'Error: Cannot divide by zero'
-            actual_error = ' '.join(docker_output).rstrip()
+                expected_error = 'Error: Cannot divide by zero'
+                actual_error = ' '.join(docker_output).rstrip()
             divide_specific_validate(docker_output, expected_result, expected_error, docker_output[1], actual_error, docker_command)
                 
 def test_should_divide_float_numbers():
