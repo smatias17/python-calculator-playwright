@@ -1,7 +1,8 @@
 # Python Playwright Functional Testing
 > This test framework was created in order to validate the LoanCalculator using Python-Pytest-Playwright.  
 > The tests can be found on 'tests_calculator' folder by operation type.   
-> Additionally, the tests can be executed by an easy command of a Makefile
+> Additionally, the tests can be executed by an easy command of a Makefile   
+> Note: The framework uses python 'subprocess' library to execute the docker commands
 
 ## Pre-requisites:
 
@@ -119,6 +120,12 @@
 - Possible issues:
     - Add pythonpath 
         ```export PYTHONPATH=.```
+
+- Pull the docker image for LoanCalculator:
+    - Pull image:
+        ```docker pull public.ecr.aws/l4q9w4c5/loanpro-calculator-cli:latest```
+    - Test that image works properly:
+        ```docker run --rm public.ecr.aws/l4q9w4c5/loanpro-calculator-cli add 8 5```
 
 ## Test execution commands:
 - To execute all tests:
